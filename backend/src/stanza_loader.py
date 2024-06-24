@@ -10,8 +10,8 @@ class StanzaModel():
     
     def stanza_process(self, text):
         doc = self.process(text)
-        sentences= doc.sentences
-        lst_words = [words for a_sentence in sentences for words in a_sentence.words]
+        sentence= doc.sentences
+        lst_words = [words for words in sentence[0].words]
         return [(a_word.text, a_word.lemma) for a_word  in lst_words]
 
 

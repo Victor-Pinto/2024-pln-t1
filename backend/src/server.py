@@ -2,8 +2,9 @@ from flask import Flask, jsonify, request
 
 from loader import model1, model2, model3, model_stemmer, model_lemmatize
 from stanza_loader import stanza_model
+from flask_cors import CORS
 app = Flask(__name__)
-
+CORS(app)  # Permite todas las solicitudes CORS
 
 @app.route("/ping", methods=['GET'])
 def pong():

@@ -13,8 +13,6 @@ class Model:
         except Exception as ee:
             print("model not found")
             return None
-
-    
     
         
 class TokenizeModel(Model):
@@ -37,14 +35,15 @@ class StemmerModel(Model):
     def stemmer(self, text):
         
         if(self.model):
-            sent_tokenization = [self.tokenize_model.tokenize(st) for st in text]
-            return [ [self.model.stem(a_token) for a_token in a_sentence] for a_sentence in sent_tokenization]
+            sent_tokenization = self.tokenize_model.tokenize(text)
+            return [self.model.stem(a_token) for a_token in sent_tokenization]
             
         else:
             return None, "model not found"
 
 import nltk
 from nltk.stem import WordNetLemmatizer
+
 
 class LemmatizeModel():
     def __init__(self, tokenize_model):
@@ -54,9 +53,8 @@ class LemmatizeModel():
 
     def lemmatize(self, text):
         
-        sent_tokenization = [self.tokenize_model.tokenize(st) for st in text]
-        return [ [self.model_lemm.lemmatize(a_token) for a_token in a_sentence] for a_sentence in sent_tokenization]
-
+        sent_tokenization = self.tokenize_model.tokenize(text) 
+        return [self.model_lemm.lemmatize(a_token) for a_token in sent_tokenization] 
 
 model1 = TokenizeModel("models/model1.pkl")
 model2 = TokenizeModel("models/model2.pkl")
